@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "620028528478",
+    "project_id": "austudy-29c95",
+    "storage_bucket": "austudy-29c95.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:620028528478:android:9894b73995a6304ce3f1cf",
+        "android_client_info": {
+          "package_name": "com.example.austudy_01"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDapS_7kZ7FpE6nmJTERbD2oU8ulSgIaaA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
