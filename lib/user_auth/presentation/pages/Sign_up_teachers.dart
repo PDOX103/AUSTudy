@@ -1,9 +1,10 @@
+import 'package:austudy_01/user_auth/firebase_auth_implementation/firebase_auth_services.dart';
 import 'package:austudy_01/user_auth/presentation/widgets/form_container_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../firebase_auth_implementation/firebase_auth_services.dart';
+import 'home_page.dart';
 import 'login_page.dart';
 
 class SignUpTeachersPage extends StatefulWidget {
@@ -14,19 +15,15 @@ class SignUpTeachersPage extends StatefulWidget {
 }
 
 class _SignUpTeachersPageState extends State<SignUpTeachersPage> {
-
   final FirebaseAuthServices _auth = FirebaseAuthServices();
-
   TextEditingController _nameController = TextEditingController();
   TextEditingController _postController = TextEditingController();
   TextEditingController _departmentController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
-
   @override
   void dispose() {
-    // TODO: implement dispose
     _nameController.dispose();
     _postController.dispose();
     _departmentController.dispose();
@@ -34,7 +31,6 @@ class _SignUpTeachersPageState extends State<SignUpTeachersPage> {
     _passwordController.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -53,12 +49,14 @@ class _SignUpTeachersPageState extends State<SignUpTeachersPage> {
                 children: [
                   Text(
                     "Teacher Sign Up",
-                    style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 30,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: 30,
                   ),
-                  // Add any additional fields specific to teachers here
                   FormContainerWidget(
                     controller: _nameController,
                     hintText: "Name",
@@ -119,24 +117,31 @@ class _SignUpTeachersPageState extends State<SignUpTeachersPage> {
                       ),
                     ),
                   ),
-
                   SizedBox(
                     height: 10,
                   ),
-                  Row(mainAxisAlignment: MainAxisAlignment.center,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Already have an account",
+                      Text(
+                        "Already have an account",
                         style: TextStyle(color: Colors.white),
                       ),
-                      SizedBox(width: 5,),
-                      // Updated the code to navigate to a new page for sign-up choice
+                      SizedBox(
+                        width: 5,
+                      ),
                       GestureDetector(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginPage()));
+                        onTap: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginPage()));
                         },
                         child: Text(
                           "Login",
-                          style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold),
                         ),
                       )
                     ],
@@ -149,21 +154,38 @@ class _SignUpTeachersPageState extends State<SignUpTeachersPage> {
       ),
     );
   }
-  void _signUp() async{
+
+  void _signUp() async {
     String name = _nameController.text;
     String post = _postController.text;
     String department = _departmentController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
 
-    User? user = await _auth.signUpWithEmailAndPassword(email, password);
+    try {
+      User? user = await _auth.signUpWithEmailAndPassword(email, password);
 
-    if(user != null ){
-      print("User is successfully created");
-      Navigator.pushNamed(context, "/home");
-    } else{
-      print("Some error happened");
+      if (user != null) {
+        print("User is successfully created: ${user.email}");
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
+      } else {
+        print("User creation failed: User is null");
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Account creation failed. Please try again."),
+            duration: Duration(seconds: 3),
+          ),
+        );
+      }
+    } catch (e) {
+      print("Error during sign up: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Error during sign up. Please try again."),
+          duration: Duration(seconds: 3),
+        ),
+      );
     }
-
   }
 }
