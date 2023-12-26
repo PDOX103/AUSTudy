@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
         child: Text(
           "Welcome To AUSTudy",
-          style: TextStyle(
+          style: TextStyle(fontSize: 30,
             color: Colors.blue,
             fontWeight: FontWeight.bold,
           ),
