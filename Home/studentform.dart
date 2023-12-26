@@ -29,7 +29,7 @@ class StudentForm extends StatelessWidget {
           onPressed: () {
             // Logic to join class
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => StudentClassPage(),
+              builder: (context) =>const StudentClassPage(className: 'SD Lab', classCode: 'CSE2100',),
             ));
           },
           child: const Text('Join Class'),
