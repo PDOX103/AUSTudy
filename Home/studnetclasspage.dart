@@ -14,12 +14,11 @@ class StudentClassPage extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
-          _buildListItem(context, Icons.videocam, "Join Class",// JoinClassPage()),
-          _buildListItem(context, Icons.quiz, "Attend Quiz", //AttendQuizPage()),
-          _buildListItem(context, Icons.assignment, "Assignment",// StudentAssignmentPage()),
-          _buildListItem(context, Icons.announcement, "Notice Board", //StudentNoticeBoardPage()),
-          _buildListItem(context, Icons.book,"Study Material"// StudentStudyMaterialPage()),
-          )
+          _buildListItem(context, Icons.videocam, "Join Class", Placeholder()), // Temporary placeholder
+          _buildListItem(context, Icons.quiz, "Attend Quiz", Placeholder()), // Temporary placeholder
+          _buildListItem(context, Icons.assignment, "Assignment", Placeholder()), // Temporary placeholder
+          _buildListItem(context, Icons.announcement, "Notice Board", Placeholder()), // Temporary placeholder
+          _buildListItem(context, Icons.book, "Study Material", Placeholder()), // Temporary placeholder
         ],
       ),
     );
@@ -35,12 +34,18 @@ class StudentClassPage extends StatelessWidget {
     );
   }
 }
-/*
-// Placeholder pages for each feature
-class JoinClassPage extends StatelessWidget { /* ... */ }
-class AttendQuizPage extends StatelessWidget { /* ... */ }
-class StudentAssignmentPage extends StatelessWidget { /* ... */ }
-class StudentNoticeBoardPage extends StatelessWidget { /* ... */ }
-class StudentStudyMaterialPage extends StatelessWidget { /* ... */ }
 
- */
+// Placeholder widget
+class Placeholder extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title:const Text("Placeholder Page"),
+      ),
+      body:const Center(
+        child: Text("This is a placeholder page."),
+      ),
+    );
+  }
+}
