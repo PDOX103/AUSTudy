@@ -10,7 +10,18 @@ class SignUpChoicePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sign Up Choice"),
+        backgroundColor: Colors.green,
+        centerTitle: true,
+        title: const Text(
+          'Sign Up Choice',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
+          ),
+        ),
       ),
       body: Center(
         child: Padding(
