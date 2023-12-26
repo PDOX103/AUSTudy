@@ -3,6 +3,8 @@ import 'package:austudy_01/user_auth/presentation/widgets/form_container_widget.
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import 'home_page.dart';
 import 'login_page.dart';
@@ -145,7 +147,38 @@ class _SignUpTeachersPageState extends State<SignUpTeachersPage> {
                         ),
                       )
                     ],
-                  )
+                  ),
+                  SizedBox(height: 10,),
+                  GestureDetector(
+                    onTap: () {
+                      _signInWithGoogle();
+
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      height: 45,
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(FontAwesomeIcons.google, color: Colors.white,),
+                            SizedBox(width: 5,),
+                            Text(
+                              "Sign in with Google",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -186,6 +219,35 @@ class _SignUpTeachersPageState extends State<SignUpTeachersPage> {
           duration: Duration(seconds: 3),
         ),
       );
+    }
+  }
+  _signInWithGoogle() async {
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+    try {
+      final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
+
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          idToken: googleSignInAuthentication.idToken,
+          accessToken: googleSignInAuthentication.accessToken,
+        );
+
+        User? user = await _auth.signInWithGoogle(credential);
+
+        if (user != null) {
+          print("Successfully signed in with Google: ${user.email}");
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+        } else {
+          print("Google Sign-In failed: User is null");
+          // Handle Google Sign-In failure if needed
+        }
+      }
+    } catch (e) {
+      print("Error during Google Sign-In: $e");
+      // Handle Google Sign-In error if needed
     }
   }
 }
