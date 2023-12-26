@@ -2,14 +2,14 @@ import 'package:austudy_01/user_auth/presentation/widgets/form_container_widget.
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+class SignUpTeachersPage extends StatelessWidget {
+  const SignUpTeachersPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sign Up"),
+        title: Text("Sign Up as Teacher"),
       ),
       body: Align(
         alignment: Alignment.center,
@@ -21,12 +21,13 @@ class SignUpPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Sign Up",
-                    style: TextStyle(fontSize: 30,color: Colors.white, fontWeight: FontWeight.bold),
+                    "Teacher Sign Up",
+                    style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: 30,
                   ),
+                  // Add any additional fields specific to teachers here
                   FormContainerWidget(
                     hintText: "Name",
                     isPasswordField: false,
@@ -35,7 +36,14 @@ class SignUpPage extends StatelessWidget {
                     height: 10,
                   ),
                   FormContainerWidget(
-                    hintText: "Student ID",
+                    hintText: "Post",
+                    isPasswordField: false,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  FormContainerWidget(
+                    hintText: "Department",
                     isPasswordField: false,
                   ),
                   SizedBox(
@@ -64,7 +72,7 @@ class SignUpPage extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        "Sign Up",
+                        "Sign Up as Teacher",
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
