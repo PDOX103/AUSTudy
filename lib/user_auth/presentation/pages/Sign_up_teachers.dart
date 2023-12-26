@@ -38,7 +38,18 @@ class _SignUpTeachersPageState extends State<SignUpTeachersPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sign Up as Teacher"),
+        backgroundColor: Colors.green,
+        centerTitle: true,
+        title: const Text(
+          'Sign Up',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
+          ),
+        ),
       ),
       body: Align(
         alignment: Alignment.center,
