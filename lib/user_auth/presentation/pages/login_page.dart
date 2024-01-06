@@ -3,6 +3,7 @@ import 'package:austudy_01/user_auth/presentation/widgets/form_container_widget.
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'Forgotpass.dart';
 import 'home_page.dart';
 import 'sign_up_choice_page.dart';
 
@@ -53,6 +54,19 @@ class LoginPage extends StatelessWidget {
                 controller: _passwordController,
                 hintText: "Password",
                 isPasswordField: true,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Forgot_pass()));
+                },
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    "Forgot Password?",
+                    style: TextStyle(color: Colors.red, fontSize: 15),
+                  ),
+                ),
               ),
               SizedBox(height: 30,),
               GestureDetector(
