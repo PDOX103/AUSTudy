@@ -3,6 +3,7 @@ import 'package:austudy_01/user_auth/presentation/widgets/form_container_widget.
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import '../../../pages/new_class_page.dart';
 import 'Forgotpass.dart';
 import 'home_page.dart';
 import 'sign_up_choice_page.dart';
@@ -124,7 +125,7 @@ class LoginPage extends StatelessWidget {
 
       if (user != null) {
         print("Successfully signed in: ${user.email}");
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NewClassPage()));
       } else {
         print("Sign in failed: User is null");
         ScaffoldMessenger.of(context).showSnackBar(
