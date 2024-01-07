@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../../pages/new_class_page.dart';
 import 'home_page.dart';
 import 'login_page.dart';
 
@@ -213,7 +214,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
       if (user != null) {
         print("User is successfully created: ${user.email}");
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NewClassPage()));
       } else {
         print("User creation failed: User is null");
         ScaffoldMessenger.of(context).showSnackBar(
