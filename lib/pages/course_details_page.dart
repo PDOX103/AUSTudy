@@ -13,15 +13,11 @@ import 'results_page.dart';
 class CourseDetailsPage extends StatelessWidget {
   final String courseTitle;
   final String courseCode;
-  final String jobTitle;
-  final String password;
 
   const CourseDetailsPage({
     Key? key,
     required this.courseTitle,
     required this.courseCode,
-    required this.jobTitle,
-    required this.password,
   }) : super(key: key);
 
   @override
