@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'course_details_page.dart';  // Import the CourseDetailsPage
+import 'course_details_page.dart';
 
 class NewClassPage extends StatefulWidget {
   @override
@@ -12,7 +12,7 @@ class _NewClassPageState extends State<NewClassPage> {
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String? _selectedJobTitle;  // Variable to keep track of selected job title
+  String? _selectedJobTitle;
 
   @override
   void dispose() {
@@ -24,8 +24,6 @@ class _NewClassPageState extends State<NewClassPage> {
 
   void _handleSubmit() {
     if (_formKey.currentState!.validate()) {
-      // Navigate to CourseDetailsPage or perform other actions
-      // ...
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -55,18 +53,24 @@ class _NewClassPageState extends State<NewClassPage> {
               TextFormField(
                 controller: _courseTitleController,
                 decoration: InputDecoration(labelText: 'Course Title'),
-                validator: (value) => value!.isEmpty ? 'Please enter a course title' : null,
+                validator: (value) =>
+                value!.isEmpty ? 'Please enter a course title' : null,
               ),
               TextFormField(
                 controller: _courseCodeController,
                 decoration: InputDecoration(labelText: 'Course Code'),
-                validator: (value) => value!.isEmpty ? 'Please enter a course code' : null,
+                validator: (value) =>
+                value!.isEmpty ? 'Please enter a course code' : null,
               ),
               DropdownButtonFormField<String>(
                 value: _selectedJobTitle,
                 decoration: InputDecoration(labelText: 'Your Job Title'),
-                items: <String>['Lecturer', 'Assistant Professor', 'Associate Professor', 'Professor']
-                    .map<DropdownMenuItem<String>>((String value) {
+                items: <String>[
+                  'Lecturer',
+                  'Assistant Professor',
+                  'Associate Professor',
+                  'Professor'
+                ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),
@@ -77,18 +81,21 @@ class _NewClassPageState extends State<NewClassPage> {
                     _selectedJobTitle = newValue!;
                   });
                 },
-                validator: (value) => value == null ? 'Please select a job title' : null,
+                validator: (value) =>
+                value == null ? 'Please select a job title' : null,
               ),
               TextFormField(
                 controller: _passwordController,
                 decoration: InputDecoration(labelText: 'Create Password'),
-                obscureText: true,  // To hide password
-                validator: (value) => value!.isEmpty ? 'Please create a password' : null,
+                obscureText: true,
+                validator: (value) =>
+                value!.isEmpty ? 'Please create a password' : null,
               ),
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _handleSubmit,
                 child: Text('Submit'),
+                style: ElevatedButton.styleFrom(elevation: 2.0),
               ),
             ],
           ),

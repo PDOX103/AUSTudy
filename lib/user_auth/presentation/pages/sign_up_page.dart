@@ -1,5 +1,6 @@
 import 'package:austudy_01/user_auth/firebase_auth_implementation/firebase_auth_services.dart';
 import 'package:austudy_01/user_auth/presentation/widgets/form_container_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -164,7 +165,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   SizedBox(height: 10,),
                   GestureDetector(
                     onTap: () {
-                      _signInWithGoogle();
+                      //_signInWithGoogle();
 
                     },
                     child: Container(
@@ -235,34 +236,34 @@ class _SignUpPageState extends State<SignUpPage> {
     }
   }
 
-  _signInWithGoogle() async {
-    final GoogleSignIn _googleSignIn = GoogleSignIn();
-
-    try {
-      final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
-
-      if (googleSignInAccount != null) {
-        final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
-
-        final AuthCredential credential = GoogleAuthProvider.credential(
-          idToken: googleSignInAuthentication.idToken,
-          accessToken: googleSignInAuthentication.accessToken,
-        );
-
-        User? user = await _auth.signInWithGoogle(credential);
-
-        if (user != null) {
-          print("Successfully signed in with Google: ${user.email}");
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-        } else {
-          print("Google Sign-In failed: User is null");
-          // Handle Google Sign-In failure if needed
-        }
-      }
-    } catch (e) {
-      print("Error during Google Sign-In: $e");
-      // Handle Google Sign-In error if needed
-    }
-  }
+  // _signInWithGoogle() async {
+  //   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  //
+  //   try {
+  //     final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
+  //
+  //     if (googleSignInAccount != null) {
+  //       final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+  //
+  //       final AuthCredential credential = GoogleAuthProvider.credential(
+  //         idToken: googleSignInAuthentication.idToken,
+  //         accessToken: googleSignInAuthentication.accessToken,
+  //       );
+  //
+  //       User? user = await _auth.signInWithGoogle(credential);
+  //
+  //       if (user != null) {
+  //         print("Successfully signed in with Google: ${user.email}");
+  //         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NewClassPage()));
+  //       } else {
+  //         print("Google Sign-In failed: User is null");
+  //         // Handle Google Sign-In failure if needed
+  //       }
+  //     }
+  //   } catch (e) {
+  //     print("Error during Google Sign-In: $e");
+  //     // Handle Google Sign-In error if needed
+  //   }
+  // }
 
 }

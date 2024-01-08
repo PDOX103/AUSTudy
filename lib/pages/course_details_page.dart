@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../class menu/class_settings_page.dart';
 import '../class menu/profile_update.dart';
+import '../profile/profilepage.dart';
+import '../user_auth/presentation/pages/login_page.dart';
 import 'live_class_page.dart';
 import 'quiz_page.dart';
 import 'assignment_page.dart';
@@ -71,7 +73,7 @@ class CourseDetailsPage extends StatelessWidget {
               title:const Text('Your Profile'),
               onTap: () {
                 // Navigate to Your Profile
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileUpdatePage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Profilepage()));
               },
             ),
             ListTile(
@@ -92,9 +94,9 @@ class CourseDetailsPage extends StatelessWidget {
               },
             ),
             ListTile(
-              title:const Text('Exit'),
+              title:const Text('Sign Out'),
               onTap: () {
-
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
               },
             ),
           ],
