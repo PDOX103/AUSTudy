@@ -12,6 +12,7 @@ Future main() async{
             appId: "1:620028528478:web:48c07d2e501d0423e3f1cf",
             messagingSenderId: "620028528478",
             projectId: "austudy-29c95"));
+    
   }else {
     await Firebase.initializeApp();
   }
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          background: Colors.black, // Set the background color to black
+          background: Colors.orange, // Set the background color to black
         ),
         useMaterial3: true,
       ),
