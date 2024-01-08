@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../class menu/class_settings_page.dart';
 import '../class menu/profile_update.dart';
-import '../profile/profilepage.dart';
+import 'package:austudy_01/class%20menu/profile_update.dart';
 import '../user_auth/presentation/pages/login_page.dart';
 import 'live_class_page.dart';
 import 'quiz_page.dart';
