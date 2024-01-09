@@ -11,13 +11,18 @@ class Forgot_pass extends StatelessWidget {
     double screenH = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Forgot Password',
-            style: TextStyle(
-                fontWeight: FontWeight.w900, fontSize: 25, color: Colors.black),
-          ),
           backgroundColor: Colors.red,
           centerTitle: true,
+          title: const Text(
+            'Forgot Password',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(25),
+              bottomRight: Radius.circular(25),
+            ),
+          ),
         ),
         body: Container(
           decoration: BoxDecoration(
@@ -56,7 +61,7 @@ class Forgot_pass extends StatelessWidget {
                           borderSide: BorderSide(
                             color: Colors.white60,
                           )),
-                      hintText: "Enter email.......",
+                      hintText: "Enter email...",
                       hintStyle: TextStyle(
                         color: Colors.white70,
                       ),
@@ -102,7 +107,7 @@ class Forgot_pass extends StatelessWidget {
                     height: (60 / 872) * screenH,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(21),
-                      color: Colors.greenAccent,
+                      color: Colors.green,
                       boxShadow: [
                         BoxShadow(
                           spreadRadius: 0,

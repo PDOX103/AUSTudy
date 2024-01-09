@@ -125,17 +125,19 @@ class _ProfilepageState extends State<Profilepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlueAccent.shade200,
       appBar: AppBar(
-        title: Text(
-          "My Profile",
-          style: TextStyle(
-            fontWeight: FontWeight.w900,
-            fontSize: 26,
+        backgroundColor: Colors.green,
+        centerTitle: true,
+        title: const Text(
+          'My Profile',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
           ),
         ),
-        backgroundColor: Colors.teal,
-        centerTitle: true,
       ),
       body: ListView(
         children: [
@@ -146,7 +148,7 @@ class _ProfilepageState extends State<Profilepage> {
               "Signed in as:",
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.purple[500],
+                color: Colors.white,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
@@ -156,7 +158,7 @@ class _ProfilepageState extends State<Profilepage> {
           Text(
             currentUser.email!,
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.black, fontSize: 16),
+            style: TextStyle(color: Colors.green, fontSize: 16),
           ),
           SizedBox(height: 10,),
           TextBox(
@@ -196,10 +198,10 @@ class TextBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.black45,
+        color: Colors.white70,
         borderRadius: BorderRadius.circular(20),
       ),
-      padding: EdgeInsets.only(left: 15, right: 15, bottom: 15),
+      padding: EdgeInsets.only(left: 10, right: 10, bottom: 4),
       margin: EdgeInsets.only(left: 15, right: 15, top: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -209,20 +211,20 @@ class TextBox extends StatelessWidget {
             children: [
               Text(
                 sectionName,
-                style: TextStyle(color: Colors.white70),
+                style: TextStyle(color: Colors.black),
               ),
               IconButton(
                 onPressed: onPressed,
                 icon: Icon(
                   Icons.edit,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
             ],
           ),
           Text(
             text,
-            style: TextStyle(fontSize: 20, color: Colors.white),
+            style: TextStyle(fontSize: 20, color: Colors.black),
           ),
         ],
       ),

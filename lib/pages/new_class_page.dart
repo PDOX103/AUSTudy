@@ -36,7 +36,18 @@ class _NewClassPageState extends State<NewClassPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Create New Class"),
+        backgroundColor: Colors.green,
+        centerTitle: true,
+        title: const Text(
+          'Create New Class',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
+          ),
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -46,17 +57,43 @@ class _NewClassPageState extends State<NewClassPage> {
             children: <Widget>[
               TextFormField(
                 controller: _courseTitleController,
-                decoration: InputDecoration(labelText: 'Course Title'),
+                decoration: InputDecoration(
+                  labelText: 'Course Title',
+                  labelStyle: TextStyle(color: Colors.white), // Set label text color
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white), // Set border color when the field is not focused
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white), // Set border color when the field is focused
+                  ),
+                ),
+                style: TextStyle(color: Colors.white), // Set text color
                 validator: (value) =>
                 value!.isEmpty ? 'Please enter a course title' : null,
               ),
+              SizedBox(
+                height: 30,
+              ),
               TextFormField(
                 controller: _courseCodeController,
-                decoration: InputDecoration(labelText: 'Course Code'),
+                decoration: InputDecoration(
+                  labelText: 'Course Code',
+                  labelStyle: TextStyle(color: Colors.white), // Set label text color
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white), // Set border color when the field is not focused
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white), // Set border color when the field is focused
+                  ),
+                ),
+                style: TextStyle(color: Colors.white), // Set text color
                 validator: (value) =>
                 value!.isEmpty ? 'Please enter a course code' : null,
               ),
-              SizedBox(height: 20),
+
+              SizedBox(
+                height: 30,
+              ),
               ElevatedButton(
                 onPressed: _handleSubmit,
                 child: Text('Submit'),

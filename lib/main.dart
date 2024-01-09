@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          background: Colors.orange, // Set the background color to black
+          background: Colors.white12, // Set the background color to black
         ),
         useMaterial3: true,
       ),
