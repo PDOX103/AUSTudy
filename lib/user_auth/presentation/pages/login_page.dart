@@ -2,18 +2,23 @@ import 'package:austudy_01/user_auth/firebase_auth_implementation/firebase_auth_
 import 'package:austudy_01/user_auth/presentation/widgets/form_container_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import '../../../pages/new_class_page.dart';
 import 'Forgotpass.dart';
 import 'home_page.dart';
 import 'sign_up_choice_page.dart';
 
-class LoginPage extends StatelessWidget {
-   LoginPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  LoginPage({Key? key}) : super(key: key);
 
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final FirebaseAuthServices _auth = FirebaseAuthServices();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +77,7 @@ class LoginPage extends StatelessWidget {
               ),
               SizedBox(height: 30,),
               GestureDetector(
-                onTap: () => _signIn(context),
+                onTap: _isLoading ? null : () => _signIn(context),
                 child: Container(
                   width: double.infinity,
                   height: 45,
@@ -81,9 +86,16 @@ class LoginPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Center(
-                    child: Text(
+                    child: _isLoading
+                        ? CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+                    )
+                        : Text(
                       "Login",
-                      style: TextStyle(color: Colors.white , fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -122,7 +134,13 @@ class LoginPage extends StatelessWidget {
     String password = _passwordController.text;
 
     try {
+      setState(() {
+        _isLoading = true;
+      });
       User? user = await _auth.signInWithEmailAndPassword(email, password);
+      setState(() {
+        _isLoading = false;
+      });
 
       if (user != null) {
         print("Successfully signed in: ${user.email}");
@@ -137,6 +155,9 @@ class LoginPage extends StatelessWidget {
         );
       }
     } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
       print("Error during sign in: $e");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -146,5 +167,4 @@ class LoginPage extends StatelessWidget {
       );
     }
   }
-
 }
