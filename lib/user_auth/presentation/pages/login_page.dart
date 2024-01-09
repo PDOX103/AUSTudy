@@ -56,6 +56,7 @@ class LoginPage extends StatelessWidget {
                 hintText: "Password",
                 isPasswordField: true,
               ),
+              SizedBox(height: 5,),
               GestureDetector(
                 onTap: () {
                   Navigator.push(context,
@@ -65,7 +66,7 @@ class LoginPage extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: Text(
                     "Forgot Password?",
-                    style: TextStyle(color: Colors.red, fontSize: 15),
+                    style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
