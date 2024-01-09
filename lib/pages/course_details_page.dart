@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import '../class menu/class_settings_page.dart';
-import '../class menu/profile_update.dart';
+
 import 'package:austudy_01/class%20menu/profile_update.dart';
 import '../user_auth/presentation/pages/login_page.dart';
 import 'live_class_page.dart';
@@ -69,7 +67,7 @@ class CourseDetailsPage extends StatelessWidget {
               title:const Text('Your Profile'),
               onTap: () {
                 // Navigate to Your Profile
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Profilepage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileUpdatePage()));
               },
             ),
             ListTile(
@@ -90,9 +88,9 @@ class CourseDetailsPage extends StatelessWidget {
               },
             ),
             ListTile(
-              title:const Text('Sign Out'),
+              title:const Text('Exit'),
               onTap: () {
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+
               },
             ),
           ],
@@ -136,86 +134,10 @@ class CourseDetailsPage extends StatelessWidget {
   }
 }
 
-class LiveClassPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title:const Text('Live Class'),
-      ),
-      body:const Center(
-        child: Text('Content for Live Classes'),
-      ),
-    );
-  }
-}
 
-class QuizPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title:const Text('Quiz'),
-      ),
-      body:const Center(
-        child: Text('Content for Quizzes'),
-      ),
-    );
-  }
-}
 
-class AssignmentPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title:const Text('Assignment'),
-      ),
-      body:const Center(
-        child: Text('Content for Assignments'),
-      ),
-    );
-  }
-}
 
-class AnnouncementPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title:const Text('Announcement'),
-      ),
-      body:const Center(
-        child: Text('Content for Announcements'),
-      ),
-    );
-  }
-}
 
-class StudyMaterialPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title:const Text('Study Materials'),
-      ),
-      body:const Center(
-        child: Text('Content for Study Materials'),
-      ),
-    );
-  }
-}
 
-class ResultsPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title:const Text('Results'),
-      ),
-      body:const Center(
-        child: Text('Content for Results'),
-      ),
-    );
-  }
-}
+
+
