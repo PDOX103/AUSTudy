@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import '../class menu/class_settings_page.dart';
-import '../class menu/profile_update.dart';
+
+import 'package:austudy_01/class%20menu/profile_update.dart';
+import '../user_auth/presentation/pages/login_page.dart';
 import 'live_class_page.dart';
 import 'quiz_page.dart';
 import 'assignment_page.dart';
@@ -11,15 +11,11 @@ import 'results_page.dart';
 class CourseDetailsPage extends StatelessWidget {
   final String courseTitle;
   final String courseCode;
-  final String jobTitle;
-  final String password;
 
   const CourseDetailsPage({
     Key? key,
     required this.courseTitle,
     required this.courseCode,
-    required this.jobTitle,
-    required this.password,
   }) : super(key: key);
 
   @override
