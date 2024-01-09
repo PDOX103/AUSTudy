@@ -1,4 +1,3 @@
-
 import 'package:austudy_01/class%20menu/profile_update.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -91,9 +90,9 @@ class CourseDetailsPage extends StatelessWidget {
               },
             ),
             ListTile(
-              title:const Text('Exit'),
+              title:const Text('Sign Out'),
               onTap: () {
-
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
               },
             ),
           ],

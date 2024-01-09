@@ -72,7 +72,7 @@ class _NewClassPageState extends State<NewClassPage> {
                 value!.isEmpty ? 'Please enter a course title' : null,
               ),
               SizedBox(
-                height: 30,
+                height: 20,
               ),
               TextFormField(
                 controller: _courseCodeController,
