@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 
-class LiveClassPage extends StatefulWidget {
-  @override
-  _LiveClassPageState createState() => _LiveClassPageState();
-}
-
-class _LiveClassPageState extends State<LiveClassPage> {
-  bool isButtonVisible = false;
-
+class LiveClassPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,28 +8,18 @@ class _LiveClassPageState extends State<LiveClassPage> {
         title: Text('Live Class'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  isButtonVisible = true; // Set the button visibility to true
-                });
-              },
-              child: Text('Live Class'),
-            ),
-            SizedBox(height: 20),
-            Visibility(
-              visible: isButtonVisible,
-              child: ElevatedButton(
-                onPressed: () {
-                  // Do something when the new button is pressed
-                },
-                child: Text('Start Class'),
-              ),
-            ),
-          ],
+        child: ElevatedButton(
+          onPressed: () {
+            // Logic to start the class goes here
+          },
+          child: Text(
+            'Start Class',
+            style: TextStyle(color: Colors.white),
+          ),
+          style: ElevatedButton.styleFrom(
+            primary: Colors.green,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          ),
         ),
       ),
     );
