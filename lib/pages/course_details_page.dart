@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import '../class menu/class_settings_page.dart';
 import '../class menu/profile_update.dart';
-import 'package:austudy_01/class%20menu/profile_update.dart';
-import '../user_auth/presentation/pages/login_page.dart';
 import 'live_class_page.dart';
 import 'quiz_page.dart';
 import 'assignment_page.dart';
@@ -73,7 +71,7 @@ class CourseDetailsPage extends StatelessWidget {
               title:const Text('Your Profile'),
               onTap: () {
                 // Navigate to Your Profile
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Profilepage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileUpdatePage()));
               },
             ),
             ListTile(
@@ -94,9 +92,9 @@ class CourseDetailsPage extends StatelessWidget {
               },
             ),
             ListTile(
-              title:const Text('Sign Out'),
+              title:const Text('Exit'),
               onTap: () {
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+
               },
             ),
           ],
@@ -187,10 +185,39 @@ class AnnouncementPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:const Text('Announcement'),
+        title: Text('Announcement'),
       ),
-      body:const Center(
-        child: Text('Content for Announcements'),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Write Announcement',
+                border: OutlineInputBorder(),
+              ),
+              maxLines: 5,
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    // Implement logic for publishing the announcement
+                  },
+                  child: Text('Publish'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context); // Close the page on cancel
+                  },
+                  child: Text('Cancel'),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
