@@ -1,41 +1,94 @@
-import 'package:austudy_01/features/app/splash_screen/splash_screen.dart';
-import 'package:austudy_01/user_auth/presentation/pages/login_page.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+// main.dart
 
-Future main() async{
-  WidgetsFlutterBinding.ensureInitialized();
-  if(kIsWeb){
-    await Firebase.initializeApp(
-        options: const FirebaseOptions(apiKey: "AIzaSyAV4EFsqTwTp6tF4wYa7KYwLaarshJOKjo",
-            appId: "1:620028528478:web:48c07d2e501d0423e3f1cf",
-            messagingSenderId: "620028528478",
-            projectId: "austudy-29c95"));
-    
-  }else {
-    await Firebase.initializeApp();
-  }
+import 'package:flutter/material.dart';
+import 'package:project_sd2/pages/new_class_page.dart';
+import 'join_page.dart'; // Import the JoinPage class
+
+void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'AUSTudy',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-          background: Colors.white12, // Set the background color to black
-        ),
-        useMaterial3: true,
+        primarySwatch: Colors.green,
       ),
-      home: SplashScreen(
-        child: LoginPage(),
+      home: MainPage(),
+    );
+  }
+}
+
+class MainPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('AUSTudy'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.person_add),
+            onPressed: () {
+              // Navigate to the JoinPage when the "Join" button is pressed
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => JoinPage()),
+              );
+            },
+          ),
+        ],
+      ),
+      body: const Center(
+        child: Text('Welcome to AUSTudy'),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            const DrawerHeader(
+              child: Text('Menu'),
+              decoration: BoxDecoration(
+                color: Colors.green,
+              ),
+            ),
+            ListTile(
+              title: const Text('Your Profile'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('Settings'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('Exit'),
+              onTap: () {
+                // Exit the app
+              },
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => NewClassPage()),
+          );
+        },
+        child: Icon(Icons.add),
+        backgroundColor: Colors.green,
       ),
     );
   }
 }
+
