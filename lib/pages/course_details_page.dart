@@ -1,6 +1,7 @@
 import 'package:austudy_01/class%20menu/profile_update.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../Chat/Chat_home_screen.dart';
 import '../class menu/class_settings_page.dart';
 import '../user_auth/presentation/pages/login_page.dart';
 import 'live_class_page.dart';
@@ -39,9 +40,12 @@ class CourseDetailsPage extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             child: IconButton(
-              icon:const Icon(Icons.groups, color: Colors.white),
+              icon:const Icon(Icons.chat, color: Colors.white),
               onPressed: () {
-                // Handle messenger icon action
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ChatHomeScreen()),
+                );
               },
             ),
           ),
