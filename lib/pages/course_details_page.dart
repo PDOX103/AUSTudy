@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../Chat/Chat_home_screen.dart';
 import '../class menu/class_settings_page.dart';
+import '../notification/Notice.dart';
 import '../user_auth/presentation/pages/login_page.dart';
 import 'live_class_page.dart';
 import 'quiz_page.dart';
@@ -110,7 +111,7 @@ class CourseDetailsPage extends StatelessWidget {
           _buildGridItem(context, 'Live Class', Icons.live_tv, LiveClassPage()),
           _buildGridItem(context, 'Quiz', Icons.question_answer_outlined, QuizPage()),
           _buildGridItem(context, 'Assignment', Icons.assignment, AssignmentPage()),
-          _buildGridItem(context, 'Announcements', Icons.edit_notifications, AnnouncementPage()),
+          _buildGridItem(context, 'Announcements', Icons.edit_notifications, Notice()),
           _buildGridItem(context, 'Study Materials', Icons.book, StudyMaterialPage()),
           _buildGridItem(context, 'Results', Icons.grade_outlined, ResultsPage()),
         ],
