@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:video_conference/video_call.dart';
 
+import '../Vedio Call/video_call.dart';
+
 class JoinWithCode extends StatelessWidget {
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,12 +49,12 @@ class JoinWithCode extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Get.to(VideoCall(channelName: _controller.text.trim()));
+                Get.to(VideoConferencePage( conferenceID: 'confernenceIDTest'),);
               },
               child: Text("Join"),
               style: ElevatedButton.styleFrom(
-                fixedSize: Size(50, 30),
-                primary: Colors.indigo,
+                fixedSize: Size(100, 30),
+                primary: Colors.green,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25)),
               ),
