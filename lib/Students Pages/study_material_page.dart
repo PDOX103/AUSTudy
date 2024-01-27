@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class AssignmentPage extends StatefulWidget {
+class StudyMaterialPage extends StatefulWidget {
   @override
-  _AssignmentPageState createState() => _AssignmentPageState();
+  _StudyMaterialPageState createState() => _StudyMaterialPageState();
 }
 
-class _AssignmentPageState extends State<AssignmentPage> {
+class _StudyMaterialPageState extends State<StudyMaterialPage> {
   bool isUploadMode = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Assignment'),
+        title: Text('Study Materials'),
       ),
       body: Center(
         child: Padding(
@@ -45,7 +45,7 @@ class _AssignmentPageState extends State<AssignmentPage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               TextFormField(
-                decoration: InputDecoration(labelText: 'Enter Assignment Details'),
+                decoration: InputDecoration(labelText: 'Enter Material Details'),
               ),
               SizedBox(height: 20),
               Row(
@@ -53,7 +53,7 @@ class _AssignmentPageState extends State<AssignmentPage> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      // Logic for publishing the assignment
+                      // Logic for publishing the study material
                     },
                     child: Text('Publish', style: TextStyle(color: Colors.white)),
                     style: ElevatedButton.styleFrom(primary: Colors.green),
