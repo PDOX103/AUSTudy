@@ -4,6 +4,8 @@ import 'package:share/share.dart';
 import 'package:uuid/uuid.dart';
 import 'package:video_conference/video_call.dart';
 
+import '../Vedio Call/video_call.dart';
+
 class NewMeeting extends StatefulWidget {
   NewMeeting({Key? key}) : super(key: key);
 
@@ -72,7 +74,7 @@ class _NewMeetingState extends State<NewMeeting> {
               label: Text("Share invite"),
               style: ElevatedButton.styleFrom(
                 fixedSize: Size(350, 30),
-                primary: Colors.indigo,
+                primary: Colors.green,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25)),
               ),
@@ -80,13 +82,13 @@ class _NewMeetingState extends State<NewMeeting> {
             SizedBox(height: 20),
             OutlinedButton.icon(
               onPressed: () {
-                Get.to(VideoCall(channelName: _meetingCode.trim()));
+                Get.to(VideoConferencePage( conferenceID: 'confernenceIDTest'),);
               },
               icon: Icon(Icons.video_call),
               label: Text("start call"),
               style: OutlinedButton.styleFrom(
                 primary: Colors.indigo,
-                side: BorderSide(color: Colors.indigo),
+                side: BorderSide(color: Colors.green),
                 fixedSize: Size(350, 30),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25)),
