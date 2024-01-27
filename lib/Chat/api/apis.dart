@@ -38,6 +38,12 @@ class APIs{
         .set(chatUser.toJson());
   }
 
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getAllUsers(){
+    return firestore.collection('teachers')
+         // Exclude current user
+        .snapshots();
+  }
+
   // Add a method to get user by email
   static Future<ChatUser?> getUserByEmail(String email) async {
     QuerySnapshot<Map<String, dynamic>> snapshot = await firestore
@@ -50,6 +56,16 @@ class APIs{
     } else {
       return null;
     }
+  }
+
+  static Future<void> updateUserInfo() async {
+     await firestore
+        .collection('teachers')
+        .doc(auth.currentUser!.uid)
+        .update({
+       'name': user.name,
+       'about': user.about
+        });
   }
 
 

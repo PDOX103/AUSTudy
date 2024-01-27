@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:austudy_01/Chat/models/chat_user.dart';
+import 'package:austudy_01/Chat/profile_sceen.dart';
 import 'package:austudy_01/Chat/widgets/chat_user_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,11 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
           IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
 
           //more features button
-          IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert))
+          IconButton(onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => ProfileScreen(user: list[0]))
+            );
+          }, icon: const Icon(Icons.more_vert))
         ],
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -51,48 +56,46 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
         },
         child: const Icon(Icons.add_comment_rounded),
       ),
-      body: _buildUserList(),
+      body: StreamBuilder(
+        stream: APIs.getAllUsers(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+            case ConnectionState.none:
+              return const Center(child: CircularProgressIndicator());
+
+            case ConnectionState.active:
+            case ConnectionState.done:
+              final data = snapshot.data?.docs;
+              list = data
+                  ?.map((e) => ChatUser.fromJson(e.data()))
+                  .toList() ??
+                  [];
+
+              if (list.isNotEmpty) {
+                return ListView.builder(
+                  itemCount: list.length,
+                  padding: EdgeInsets.only(top: mq.height * .01),
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return ChatUserCard(user: list[index]);
+                  },
+                );
+              } else {
+                return const Center(
+                  child: Text(
+                    'No Connection Found',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                );
+              }
+          }
+        },
+      ),
     );
   }
 
-  Widget _buildUserList() {
-    return StreamBuilder(
-      stream: APIs.firestore.collection('teachers').snapshots(),
-      builder: (context, snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.waiting:
-          case ConnectionState.none:
-            return const Center(child: CircularProgressIndicator());
 
-          case ConnectionState.active:
-          case ConnectionState.done:
-            final data = snapshot.data?.docs;
-            list = data
-                ?.map((e) => ChatUser.fromJson(e.data()))
-                .toList() ??
-                [];
-
-            if (list.isNotEmpty) {
-              return ListView.builder(
-                itemCount: list.length,
-                padding: EdgeInsets.only(top: mq.height * .01),
-                physics: BouncingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return ChatUserCard(user: list[index]);
-                },
-              );
-            } else {
-              return const Center(
-                child: Text(
-                  'No Connection Found',
-                  style: TextStyle(fontSize: 20),
-                ),
-              );
-            }
-        }
-      },
-    );
-  }
 
   void _addUserDialog(BuildContext context) {
     String email = '';
