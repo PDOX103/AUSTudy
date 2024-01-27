@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:project_sd2/pages/new_class_page.dart';
-import 'join_page.dart'; // Import the JoinPage class
+import 'Students Pages/join_page.dart'; // Import the JoinPage class
 
 void main() {
   runApp(MyApp());
