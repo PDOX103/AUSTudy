@@ -1,24 +1,26 @@
-
-import 'package:austudy_01/class%20menu/profile_update.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../class menu/class_settings_page.dart';
-import '../user_auth/presentation/pages/login_page.dart';
+import '../class menu/profile_update.dart';
 import 'live_class_page.dart';
 import 'quiz_page.dart';
 import 'assignment_page.dart';
 import 'announcement_page.dart';
 import 'study_material_page.dart';
 import 'results_page.dart';
+import 'group_details_page.dart';
 
 class CourseDetailsPage extends StatelessWidget {
   final String courseTitle;
   final String courseCode;
+  final String jobTitle;
+  final String password;
 
   const CourseDetailsPage({
     Key? key,
     required this.courseTitle,
     required this.courseCode,
+    required this.jobTitle,
+    required this.password,
   }) : super(key: key);
 
   @override
@@ -34,15 +36,16 @@ class CourseDetailsPage extends StatelessWidget {
         ),
         actions: <Widget>[
           Container(
-            margin:const EdgeInsets.all(8),
-            decoration:const BoxDecoration(
+            margin: const EdgeInsets.all(8),
+            decoration: const BoxDecoration(
               color: Colors.green,
               shape: BoxShape.circle,
             ),
             child: IconButton(
-              icon:const Icon(Icons.groups, color: Colors.white),
+              icon: const Icon(Icons.groups, color: Colors.white),
               onPressed: () {
-                // Handle messenger icon action
+                // Navigate to the GroupDetailsPage when the group icon is pressed
+                Navigator.push(context, MaterialPageRoute(builder: (context) => GroupDetailsPage()));
               },
             ),
           ),
@@ -70,7 +73,7 @@ class CourseDetailsPage extends StatelessWidget {
               title:const Text('Your Profile'),
               onTap: () {
                 // Navigate to Your Profile
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Profilepage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileUpdatePage()));
               },
             ),
             ListTile(
