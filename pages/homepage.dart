@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
             label: Text("New Meeting"),
             style: ElevatedButton.styleFrom(
               fixedSize: Size(350, 30),
-              primary: Colors.indigo,
+              primary: Colors.green,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25)),
             ),
@@ -46,7 +46,7 @@ class HomePage extends StatelessWidget {
             label: Text("Join with a code"),
             style: OutlinedButton.styleFrom(
               primary: Colors.indigo,
-              side: BorderSide(color: Colors.indigo),
+              side: BorderSide(color: Colors.green),
               fixedSize: Size(350, 30),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25)),
