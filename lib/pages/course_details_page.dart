@@ -144,8 +144,3 @@ class CourseDetailsPage extends StatelessWidget {
 
 
 
-
-
-
-
-
