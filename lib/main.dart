@@ -14,21 +14,26 @@ Future<void> backgroundHandler(RemoteMessage message) async {
   print(message.notification!.title);
 }
 
-Future main() async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if(kIsWeb){
+  if (kIsWeb) {
     await Firebase.initializeApp(
-        options: const FirebaseOptions(apiKey: "AIzaSyAV4EFsqTwTp6tF4wYa7KYwLaarshJOKjo",
-            appId: "1:620028528478:web:48c07d2e501d0423e3f1cf",
-            messagingSenderId: "620028528478",
-            projectId: "austudy-29c95"));
-    
-  }else {
+      options: const FirebaseOptions(
+        apiKey: "AIzaSyAV4EFsqTwTp6tF4wYa7KYwLaarshJOKjo",
+        appId: "1:620028528478:web:48c07d2e501d0423e3f1cf",
+        messagingSenderId: "620028528478",
+        projectId: "austudy-29c95",
+      ),
+    );
+  } else {
     await Firebase.initializeApp();
+    FirebaseMessaging.onBackgroundMessage(backgroundHandler);
+    // Initialize local notification service
+    LocalNotificationService.initialize();
+    // Retrieve and print device token
+    String? token = await FirebaseMessaging.instance.getToken();
+    print('Device Token: $token');
   }
-
-  FirebaseMessaging.onBackgroundMessage(backgroundHandler);
-  LocalNotificationService.initialize();
 
   runApp(MyApp());
 }
