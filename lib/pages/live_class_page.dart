@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'homevideo.dart';
+
+
 
 class LiveClassPage extends StatelessWidget {
   @override
@@ -10,6 +15,8 @@ class LiveClassPage extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
+
+            Get.to(HomePage());
             // Logic to start the class goes here
           },
           child: Text(

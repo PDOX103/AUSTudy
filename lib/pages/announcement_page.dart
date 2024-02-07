@@ -1,42 +1,38 @@
 import 'package:flutter/material.dart';
 
-class AnnouncementPage extends StatelessWidget {
+class AnnouncementPage extends StatefulWidget {
+  @override
+  _AnnouncementPageState createState() => _AnnouncementPageState();
+}
+
+class _AnnouncementPageState extends State<AnnouncementPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:const Text('Announcement'),
+        title: Text('Announcement'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextFormField(
-              decoration:const InputDecoration(
-                labelText: 'Write Announcement',
-                border: OutlineInputBorder(),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Write Announcement'),
+                maxLines: 5,
               ),
-              maxLines: 5,
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    // Implement logic for publishing the announcement
-                  },
-                  child:const Text('Publish'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context); // Close the page on cancel
-                  },
-                  child:const Text('Cancel'),
-                ),
-              ],
-            ),
-          ],
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  // Logic for publishing the announcement
+                },
+                child: Text('Publish', style: TextStyle(color: Colors.white)),
+                style: ElevatedButton.styleFrom(primary: Colors.green),
+              ),
+            ],
+          ),
         ),
       ),
     );

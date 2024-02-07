@@ -73,7 +73,7 @@ class CourseDetailsPage extends StatelessWidget {
               title:const Text('Your Profile'),
               onTap: () {
                 // Navigate to Your Profile
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileUpdatePage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Profilepage()));
               },
             ),
             ListTile(
