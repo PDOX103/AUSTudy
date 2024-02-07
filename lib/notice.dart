@@ -42,10 +42,10 @@ class _noticeState extends State<notice> {
     double screenW = MediaQuery.of(context).size.width;
     double screenH = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Color(0xffb8d8d8),
+      backgroundColor: Colors.green,
       appBar: AppBar(
         title: Text("Notice"),
-        backgroundColor: Color(0xff7a9e9f),
+        backgroundColor: Colors.white,
         actions: [
           IconButton(
               onPressed: () {
@@ -54,7 +54,7 @@ class _noticeState extends State<notice> {
               },
               icon: Icon(
                 Icons.add,
-                color: Colors.white,
+                color: Colors.black,
               )),
         ],
       ),
@@ -172,8 +172,8 @@ class _noticeState extends State<notice> {
                               elevation: 4,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
-                                  side: BorderSide(color: Color(0xff217096))),
-                              color: Color(0xff77a5b5),
+                                  side: BorderSide(color: Colors.green)),
+                              color: Colors.white,
                               child: Column(
                                 children: [
                                   Padding(
@@ -197,7 +197,7 @@ class _noticeState extends State<notice> {
                                         textAlign: TextAlign.justify,
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: Colors.green,
                                           fontSize: 24,
                                         ),
                                       ),
@@ -225,7 +225,7 @@ class _noticeState extends State<notice> {
                   });
             } else {
               return Center(
-                child: Text("No notice here to show", style: TextStyle(fontSize: 21)),
+                child: Text("No notice", style: TextStyle(fontSize: 21)),
               );
             }
           }),

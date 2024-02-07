@@ -33,10 +33,10 @@ class _add_noticeState extends State<add_notice> {
     double screenH = MediaQuery.of(context).size.height;
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Color(0xffb8d8d8),
+        backgroundColor: Colors.white70,
         appBar: AppBar(
           title: Text("Add Notice"),
-          backgroundColor: Color(0xff7a9e9f),
+          backgroundColor: Colors.white,
         ),
         body:
 
