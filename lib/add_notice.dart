@@ -6,9 +6,10 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:http/http.dart' as http;
+
 import 'main.dart';
+import 'notification.dart';
 
 class add_notice extends StatefulWidget {
   @override
@@ -16,6 +17,7 @@ class add_notice extends StatefulWidget {
 }
 
 class _add_noticeState extends State<add_notice> {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   var text = TextEditingController();
 
   var caption = TextEditingController();
@@ -33,10 +35,10 @@ class _add_noticeState extends State<add_notice> {
     double screenH = MediaQuery.of(context).size.height;
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white70,
+        backgroundColor: Color(0xffb8d8d8),
         appBar: AppBar(
           title: Text("Add Notice"),
-          backgroundColor: Colors.white,
+          backgroundColor: Color(0xff7a9e9f),
         ),
         body:
 
@@ -161,9 +163,11 @@ class _add_noticeState extends State<add_notice> {
                                     fillColor: Color(0xff77a5b5),
                                     hintText: '  Tittle',
                                     hintStyle: TextStyle(color: Colors.white70),
-                                    counterStyle: TextStyle(color: Colors.black, fontSize: 15),
+                                    counterStyle:
+                                    TextStyle(color: Colors.black, fontSize: 15),
                                     counterText: 'Remaining: $count',
-                                    floatingLabelAlignment: FloatingLabelAlignment.start,
+                                    floatingLabelAlignment:
+                                    FloatingLabelAlignment.start,
                                     alignLabelWithHint: true,
                                     errorBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
@@ -210,8 +214,10 @@ class _add_noticeState extends State<add_notice> {
                                 filled: true,
                                 fillColor: Color(0xff77a5b5),
                                 hintText: 'Description',
-                                hintStyle: TextStyle(color: Colors.white70, fontSize: 18),
-                                floatingLabelAlignment: FloatingLabelAlignment.start,
+                                hintStyle:
+                                TextStyle(color: Colors.white70, fontSize: 18),
+                                floatingLabelAlignment:
+                                FloatingLabelAlignment.start,
                                 alignLabelWithHint: true,
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -248,44 +254,38 @@ class _add_noticeState extends State<add_notice> {
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: GestureDetector(
-                            onTap: () async {
-                              // Your logic to send notifications
-                              for (int i = 0; i < to.length; i++) {
-                                var data = {
-                                  'to': "czSFTxW8Q3itUL0tP0SKjI:APA91bG1wJd3Bw1tN42FEUuWFdk-mh2x_W847vyme1nGEvf9o0uOxbrWj8EIu-Q8taZC0aKX0J6mCRpsCXquLDebfzKFwJwOmflfyR1ek1wPPk_jw4y43W811v26YQyFu9CL6LK4Yjnp",
-                                  'notification': {
-                                    'title': "Notice\n" + caption.text.toString(),
-                                    'body': text.text.toString(),
-                                  },
-                                };
-
-                                // Send HTTP POST request to FCM API
-                                var response = await http.post(
-                                  Uri.parse('https://fcm.googleapis.com/fcm/send'),
-                                  body: jsonEncode(data),
-                                  headers: {
-                                    'Content-Type': 'application/json',
-                                    'Authorization': 'AAAAkFyUh14:APA91bHhbRORD6PRYpSHuNRtKnhYqHBK5eDbBZDZHXv7uZQMoxlFkCe9iQAV_KddvR2Ay9Y5WVp1HhJlA8ihYlfd8Kr0JV6XZXUAs36MjHTxCoOqQGuengoIjMY-XecZguglXrkP3_wn', // Replace with your server key
-                                  },
-                                );
-
-                                // Check the response and handle errors if any
-                                if (response.statusCode == 200) {
-                                  print('Notification sent successfully to ${to[i]}');
-                                } else {
-                                  print('Failed to send notification to ${to[i]}');
-                                  // Handle the error accordingly
-                                }
+                            onTap: () {
+                              if (formKey.currentState!.validate()) {
+                                PushNotifications.init().then((value)async{
+                                  final token= await FirebaseMessaging.instance.getToken();
+                                  print(token);
+                                  for(int i=0;i<to.length;i++){
+                                    var data={
+                                      'to':to[i],
+                                      'priority':'high',
+                                      'notification':{
+                                        'title':"Notice\n"+caption.text.toString(),
+                                        'body':text.text.toString(),
+                                      },
+                                      'additional option':{
+                                        'channel':'1',
+                                      }
+                                    };
+                                    await http.post(Uri.parse('https://fcm.googleapis.com/fcm/send'),
+                                        body:jsonEncode(data) ,
+                                        headers: {
+                                          'Content-Type':'application/json; charset=UTF-8',
+                                          'Authorization':'key=AAAA2TCZdvQ:APA91bHvIxfRdJ4yoEJXHDrPKBcMeWmf-VlVcHuh6gvun7QUGwrFiN9dobcO7H8jx1Z7ayt3nXEV2yjnoWB3_VbdranUUy8UNRfuEDOtb9vCWqi-DXxmZk-1Bnul2UfUnX1zhi-pm9vH'
+                                        }
+                                    );
+                                  }
+                                });
+                                Navigator.pop(context);
+                                setState(() {
+                                  strm_opn = true;
+                                });
                               }
-
-                              // After sending notifications, you can perform other actions if needed
-                              // For example, navigate back or update UI
-                              Navigator.pop(context);
-                              setState(() {
-                                strm_opn = true;
-                              });
                             },
-
                             child: Center(child: const Text("Publish",style: TextStyle(color: Colors.white),))),
                       ),
                     ],
@@ -295,8 +295,6 @@ class _add_noticeState extends State<add_notice> {
             ),
           );
         })
-
-
     );
   }
 }
