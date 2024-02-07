@@ -35,10 +35,10 @@ class _add_noticeState extends State<add_notice> {
     double screenH = MediaQuery.of(context).size.height;
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Color(0xffb8d8d8),
+        backgroundColor: Colors.white70,
         appBar: AppBar(
           title: Text("Add Notice"),
-          backgroundColor: Color(0xff7a9e9f),
+          backgroundColor: Colors.green,
         ),
         body:
 
@@ -254,32 +254,34 @@ class _add_noticeState extends State<add_notice> {
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: GestureDetector(
-                            onTap: () {
+                            onTap: () async {
                               if (formKey.currentState!.validate()) {
-                                PushNotifications.init().then((value)async{
-                                  final token= await FirebaseMessaging.instance.getToken();
-                                  print(token);
-                                  for(int i=0;i<to.length;i++){
-                                    var data={
-                                      'to':to[i],
-                                      'priority':'high',
-                                      'notification':{
-                                        'title':"Notice\n"+caption.text.toString(),
-                                        'body':text.text.toString(),
-                                      },
-                                      'additional option':{
-                                        'channel':'1',
-                                      }
-                                    };
-                                    await http.post(Uri.parse('https://fcm.googleapis.com/fcm/send'),
-                                        body:jsonEncode(data) ,
-                                        headers: {
-                                          'Content-Type':'application/json; charset=UTF-8',
-                                          'Authorization':'key=AAAA2TCZdvQ:APA91bHvIxfRdJ4yoEJXHDrPKBcMeWmf-VlVcHuh6gvun7QUGwrFiN9dobcO7H8jx1Z7ayt3nXEV2yjnoWB3_VbdranUUy8UNRfuEDOtb9vCWqi-DXxmZk-1Bnul2UfUnX1zhi-pm9vH'
-                                        }
-                                    );
-                                  }
-                                });
+                                // Save notice data to Firestore
+                                // Your existing logic to save notice data goes here
+
+                                // Send notification to users
+                                final token = await FirebaseMessaging.instance.getToken();
+                                print(token);
+                                for (int i = 0; i < to.length; i++) {
+                                  var data = {
+                                    'to': to[i],
+                                    'notification': {
+                                      'title': "Notice\n" + caption.text.toString(),
+                                      'body': text.text.toString(),
+                                    },
+                                  };
+                                  await http.post(
+                                    Uri.parse('https://fcm.googleapis.com/fcm/send'),
+                                    body: jsonEncode(data),
+                                    headers: {
+                                      'Content-Type': 'application/json',
+                                      'Authorization':
+                                      'AAAAkFyUh14:APA91bHhbRORD6PRYpSHuNRtKnhYqHBK5eDbBZDZHXv7uZQMoxlFkCe9iQAV_KddvR2Ay9Y5WVp1HhJlA8ihYlfd8Kr0JV6XZXUAs36MjHTxCoOqQGuengoIjMY-XecZguglXrkP3_wn'
+                                    },
+                                  );
+                                }
+
+                                // Show a confirmation message or navigate back to the previous screen
                                 Navigator.pop(context);
                                 setState(() {
                                   strm_opn = true;
