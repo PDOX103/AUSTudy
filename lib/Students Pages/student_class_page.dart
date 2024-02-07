@@ -79,7 +79,7 @@ class StudentClassPage extends StatelessWidget {
               onTap: () {
                 // Navigate to Your Profile
                 // You can replace ProfileUpdatePage with the appropriate destination
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileUpdatePage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Profilepage()));
               },
             ),
             ListTile(

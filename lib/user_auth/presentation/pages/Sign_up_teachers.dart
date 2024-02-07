@@ -28,6 +28,8 @@ class _SignUpTeachersPageState extends State<SignUpTeachersPage> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
+  bool _isLoading = false;
+
   @override
   void dispose() {
     _nameController.dispose();
@@ -116,7 +118,7 @@ class _SignUpTeachersPageState extends State<SignUpTeachersPage> {
                     height: 30,
                   ),
                   GestureDetector(
-                    onTap: _signUp,
+                    onTap: _isLoading ? null : _signUp,
                     child: Container(
                       width: double.infinity,
                       height: 45,
@@ -125,7 +127,11 @@ class _SignUpTeachersPageState extends State<SignUpTeachersPage> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Center(
-                        child: Text(
+                        child: _isLoading
+                            ? CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+                        )
+                            : Text(
                           "Sign Up as Teacher",
                           style: TextStyle(
                             color: Colors.white,
@@ -211,12 +217,19 @@ class _SignUpTeachersPageState extends State<SignUpTeachersPage> {
     String password = _passwordController.text;
 
     try {
+      setState(() {
+        _isLoading = true;
+      });
+
       User? user = await _auth.signUpWithEmailAndPassword(email, password);
+
+      setState(() {
+        _isLoading = false;
+      });
 
       if (user != null) {
         print("User is successfully created: ${user.email}");
 
-        // Store additional user data in Firestore
         await _storeTeacherData(user.uid, name, post, department, email);
 
         Navigator.pushReplacement(
@@ -231,6 +244,10 @@ class _SignUpTeachersPageState extends State<SignUpTeachersPage> {
         );
       }
     } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+
       print("Error during sign up: $e");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -256,35 +273,3 @@ class _SignUpTeachersPageState extends State<SignUpTeachersPage> {
     }
   }
 }
-
-//   _signInWithGoogle() async {
-//     final GoogleSignIn _googleSignIn = GoogleSignIn();
-//
-//     try {
-//       final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
-//
-//       if (googleSignInAccount != null) {
-//         final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
-//
-//         final AuthCredential credential = GoogleAuthProvider.credential(
-//           idToken: googleSignInAuthentication.idToken,
-//           accessToken: googleSignInAuthentication.accessToken,
-//         );
-//
-//         User? user = await _auth.signInWithGoogle(credential);
-//
-//         if (user != null) {
-//           print("Successfully signed in with Google: ${user.email}");
-//           await _storeTeacherData(user.uid, 'Google User', '', '', user.email);
-//           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NewClassPage()));
-//         } else {
-//           print("Google Sign-In failed: User is null");
-//           // Handle Google Sign-In failure if needed
-//         }
-//       }
-//     } catch (e) {
-//       print("Error during Google Sign-In: $e");
-//       // Handle Google Sign-In error if needed
-//     }
-//   }
-// }

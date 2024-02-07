@@ -32,7 +32,7 @@ class _ProfilepageState extends State<Profilepage> {
     if (currentUser != null) {
       DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
           .collection("teachers")
-          .doc(currentUser.uid) // Use currentUser.uid instead of currentUser.email
+          .doc(currentUser.uid)
           .get();
 
       if (userSnapshot.exists) {
